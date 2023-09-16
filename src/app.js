@@ -6,15 +6,10 @@ export default class GameSavingLoader {
     return (async () => {
       try {
         const buffer = await read();
-        return (async () => {
-          try {
-            return JSON.parse(await json(buffer));
-          } catch (error) {
-            console.log(error);
-          }
-        })();
+        const result = await json(buffer);
+        return JSON.parse(result);
       } catch (error) {
-        console.log(error);
+        return error;
       }
     })();
   }
